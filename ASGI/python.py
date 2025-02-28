@@ -29,23 +29,33 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class MyConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-         await self.accept()
+
+        await self.channel_layer.group_add(WEBSOKECT_ROOM_NAME, self.channel_name) #connect to channel
+        await self.accept() # accpet the connection
 
     async def disconnect(self, close_code):
+       await self.channel_layer.group_discard(WEBSOKECT_ROOM_NAME, self.channel_name) # disconnect from channel
        pass
 
     # Receive message from WebSocket
     async def receive(self, text_data):
         # any process when data sends from client to server
         await print(json.loads(text_data)["message"])        
+        
+        # send data to all users that connected to same channel (channel layers)
+        await self.channel_layer.group_send(self.group_name, {
+                "type": "send_data", # the function that send message 
+                "message":"hello from server"
+            })
 
+        #send data for the one client that send data to server
+        await self.send(text_data=data)
 
     # send data to webSocket
-    async def send_data(self):
-        text_data = {"message" : "hello from server"}
-        text_data = json.dumps(text_data) # convert dict to json format 
-        
-        await self.send(text_data=text_data)
+    async def send_data(self , event):
+        await self.send(text_data=json.dumps({
+            "message" : event["message"]
+            }))
 
 #################################################################################################
 
