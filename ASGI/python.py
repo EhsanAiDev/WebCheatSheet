@@ -1,4 +1,4 @@
-# for this project you need to install "channels_redict==3.4.1" becuz it's work on this version
+# for this project you need to install "channels_redis=3.4.1" becuz it's work on this version
 #################################################################################################
 
 # asgi.py in project folder
