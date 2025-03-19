@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title><style>
+        body{
+            font-family: sans-serif;
+
+            display: grid;
+            place-content: center;
+        }
+        #box{
+            width: 400px;
+            /* height: 480px; */
+            height: 430px;
+
+            border: solid;
+            border-width: 2px;
+            border-color: black;
+            border-radius: 15px;
+
+        }
+        #box h1{
+            text-align: center;
+            border-bottom: dashed;
+            border-width: 1px;
+            
+            padding-bottom: 20px;
+        }
+        .field{
+            margin-top: 20px;
+        }
+        #input-feild{
+            width: 380px;
+            height: auto;
+            margin-top: 35px;
+
+            
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+
+        .input-box{
+            margin-top: 2px;
+            width: 380px;
+            height: 30px;
+
+
+            
+            border: solid;
+            border-width: 1px;
+            border-color: black;
+            border-radius: 5px;
+        }      
+        #button-div{
+            height: 35px;
+            
+            display: grid;
+            place-content: center;
+        }
+        #submit-button{
+            margin-top: 40px;
+            
+            width: 280px;
+            height: 35px;
+
+            font-family: sans-serif;
+            font-weight: 1000;
+            font-size: large;
+            
+            border: solid;
+            border-width: 1px;
+            border-color: black;
+            border-radius: 5px;
+
+        }   
+        label{
+            font-size: larger;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    {% include 'messages.html' %}
+    <div id="box">
+        <h1>Sign Up</h1>
+        
+        <div id="input-feild">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="field">
+                    <label for="username">Username:</label>
+                    <input id="username" class="input-box"name="username" type="text" required placeholder="username">
+                </div>
+    
+                <div class="field">
+                        <label for="password1">Password:</label>
+                        <input id="password1" class="input-box"name="password1" type="password" required placeholder="password">
+                </div>
+                
+                <div class="field">
+                    <label for="password2">Verify Password:</label>
+                    <input id="password2" class="input-box" name="password2" type="password" required placeholder="password">
+                </div>
+                
+                <div id="button-div">
+                    <button type="submit" id="submit-button" name="singup">Sing up</button>
+                </div>
+            
+            </form>
+            <a href="{% url 'login' %}"><h5 style="margin-top: 30px;">have already an account :) ?</h5></a>
+        </div>
+
+    </div>
+</body>
+</html>
+    
