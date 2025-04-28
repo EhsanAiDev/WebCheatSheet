@@ -40,10 +40,19 @@
 </head>
 
 <body>
-<div class="alert-box error"><span>error: </span>Write your error message here.</div>
-<div class="alert-box success"><span>success: </span>Write your success message here.</div>
-<div class="alert-box warning"><span>warning: </span>Write your warning message here.</div>
-<div class="alert-box notice"><span>notice: </span>Write your notice message here.</div>
+{% if messages %}
+	{% for message in messages %}
+		{% if message.tags == 'error' %}
+			<div class="alert-box error"><span>error: </span>{{ message }}</div>
+		{% elif message.tags == 'success' %}
+			<div class="alert-box success"><span>success: </span>{{ message }}</div>
+		{% elif message.tags == 'warning' %}
+			<div class="alert-box warning"><span>warning: </span>{{ message }}</div>
+		{% elif message.tags == 'notice' %}
+			<div class="alert-box notice"><span>notice: </span>{{ message }}</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
 </body>
 
 </html>
