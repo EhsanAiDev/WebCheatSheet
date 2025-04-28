@@ -52,7 +52,7 @@ def LogOutPage(r):
     success(r , "Logouted successfuly")
     return redirect("home")
 
-def ForgetPasswordPage(r):
+def ChangePasswordPage(r):
     if r.user.is_authenticated:
         if r.method == "POST":
             form = PasswordChangeForm(r.user, r.POST)
@@ -65,7 +65,7 @@ def ForgetPasswordPage(r):
                 errors = form.errors
                 for key,value in errors.items():
                     error(r,value.as_text().replace("* " , ""))
-        return render(r,"UserSystem/forget_password.html")
+        return render(r,"UserSystem/change_password.html")
     else:
         error(r,"you are not authenticated")
         return redirect("home")
