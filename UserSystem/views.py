@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login , logout , authenticate
 from django.contrib.messages import success , error
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 def LoginPage(r):
     if not r.user.is_authenticated:
@@ -49,3 +51,21 @@ def LogOutPage(r):
     logout(r)
     success(r , "Logouted successfuly")
     return redirect("home")
+
+def ForgetPasswordPage(r):
+    if r.user.is_authenticated:
+        if r.method == "POST":
+            form = PasswordChangeForm(r.user, r.POST)
+            if form.is_valid():
+                user = form.save()
+                update_session_auth_hash(r, user)
+                success(r,"the password changed successfully")
+                return redirect('profile')              
+            else:
+                errors = form.errors
+                for key,value in errors.items():
+                    error(r,value.as_text().replace("* " , ""))
+        return render(r,"UserSystem/forget_password.html")
+    else:
+        error(r,"you are not authenticated")
+        return redirect("home")
