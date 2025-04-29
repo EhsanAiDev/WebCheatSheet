@@ -1,0 +1,35 @@
+CREATE USER 'new_username'@'localhost' IDENTIFIED BY 'your_password'; --> creating database's user
+GRANT ALL PRIVILEGES ON *.* TO 'new_username'@'localhost'; --> give all database's privileges to that user
+
+
+CREATE DATABASE your_database_name; --> creating database
+
+DROP DATABASE your_database_name; --> removing database
+DROP TABLES table_name; --> removing table 
+
+USE your_database_name; --> select database in sql envarment 
+
+SHOW DATABASES; --> show all databases 
+
+SHOW TABLES; --> show tables of that database
+
+
+creating table:
+CREATE TABLE table_name (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    age INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+DESCRIBE table_name; --> show info of that tabel 
+
+
+CRUD in sql:
+INSERT INTO table_name (column1, column2) VALUES ('data1', 'data2');
+UPDATE tabel_name SET column1 = 'data1', column2 = 'data2' WHERE id = 1;
+DELETE FROM tabel_name WHERE id = 1;
+select * from table_name;
+
