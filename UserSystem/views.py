@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login , logout , authenticate
 from django.contrib.messages import success , error
@@ -69,3 +69,8 @@ def ChangePasswordPage(r):
     else:
         error(r,"you are not authenticated")
         return redirect("home")
+
+def ProfilePage(r,pk):
+    user = get_object_or_404(User, username=pk)
+    
+    return render(r , "UserSystem/profile.html", context={"user":user})

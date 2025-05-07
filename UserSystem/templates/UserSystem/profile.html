@@ -1,0 +1,89 @@
+{% include 'message.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+</head>
+<style>
+    body {
+        display: grid;
+        place-content: center;
+    }
+    #profile-div {
+        margin-top: 60px;
+        width: 400px;
+        min-height: 350px;
+        max-height: none;
+
+        border: solid;
+        border-color: black;
+        border-width: 3px;
+        border-radius: 20px;
+
+        display: grid;
+        grid-template-rows: 115px 2fr;
+    }
+    #info {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        
+        border-bottom: dashed;
+        border-width: 2px;
+
+        display: grid;
+        grid-template-columns: 1fr auto;
+    }
+    #info-text {
+        margin-left: 5px;
+    }
+    #info-text h3 {
+        margin: 0px;
+        margin-left: 3px;
+        margin-top: 5px;
+        margin-bottom: 2px;
+    }
+    #info-text h4 {
+        margin: 0px;
+        margin-left: 3px;
+        
+
+    }
+    #info img {
+
+        margin: 0px;
+        width: 100px;
+        height: 113px;
+
+        border-top-right-radius: 20px;
+        border-left: dashed;
+        border-width: 2px;
+    }
+  
+    #logout-text {
+        margin: 0px;
+        text-align: end;
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+</style>
+
+<body>
+    <div id="profile-div">
+        <div id="info">
+            <div id="info-text">
+                <h3>username: {{ user.username }}</h2>
+                <h4>joined at: {{ user.date_joined|date }}</h4>
+            </div>
+            <img src="">
+        </div>
+        
+        <h4 id="logout-text">
+            {% if request.user.username == user.username %}<a href="{% url 'ChangePassword' %}">Change Password</a> | <a href="{% url 'logout' %}">Logout</a> | {% endif %}<a href="/">Back</a>
+        </h4>
+    
+    </div>
+    
+</body>
+</html>  
